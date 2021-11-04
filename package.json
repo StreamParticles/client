@@ -1,0 +1,36 @@
+{
+  "name": "@streamparticles/client",
+  "version": "0.0.1",
+  "description": "StreamParticles npm client",
+  "main": "out/index.js",
+  "source": "src/index.ts",
+  "scripts": {
+    "build": "rm -rf out && tsc",
+    "lint": "eslint src --ext .ts",
+    "publish:patch": "tsc && npm version patch  && npm publish",
+    "publish:minor": "tsc && npm version minor  && npm publish",
+    "publish:major": "tsc && npm version major  && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StreamParticles/client.git"
+  },
+  "author": "StreamParticles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StreamParticles/client/issues"
+  },
+  "homepage": "https://github.com/StreamParticles/client#readme",
+  "dependencies": {
+    "@streamparticles/lib": "^0.1.23",
+    "axios": "^0.24.0",
+    "querystring": "^0.2.1",
+    "socket.io-client": "^4.3.2"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "prettier-eslint": "^13.0.0",
+    "prettier-eslint-cli": "^5.0.1"
+  }
+}

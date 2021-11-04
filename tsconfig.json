@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+      "module": "CommonJS",
+      "target": "es2015",
+      "outDir": "out",
+      "baseUrl": "src",
+      "moduleResolution": "node",
+      "declaration": true, 
+      "declarationMap": true,
+      "sourceMap": true,
+      "esModuleInterop": true //https://stackoverflow.com/questions/57635797/es6-module-mongoose-has-no-default-export
+    },
+    "dependencies": {
+        "typescript": "4.4.2"
+      },
+    "include": [
+      "src"
+    ],
+    "exclude": [
+      "node_modules",
+      "out",
+    ],
+  }
