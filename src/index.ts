@@ -63,21 +63,24 @@ class StreamParticlesClient {
       throw new Error("You must enable socket client in class construction");
     }
 
-    this.socket.on("connect", () => {
-      // We emit an authentication socket with the authToken
-      // We send the herotag too in order to join the good socket room
-      this.socket.emit("authentication", {
-        apiKey: this.apiKey,
-        herotag: this.herotag,
+    return new Promise<void>((resolve) => {
+      this.socket.on("connect", () => {
+        // We emit an authentication socket with the authToken
+        // We send the herotag too in order to join the good socket room
+        this.socket.emit("authentication", {
+          apiKey: this.apiKey,
+          herotag: this.herotag,
+        });
+
+        // Server responds that we are well authenticated
+        this.socket.on("authenticated", function () {
+          this.isSocketAuthenticated = true;
+          resolve();
+        });
       });
 
-      // Server responds that we are well authenticated
-      this.socket.on("authenticated", function () {
-        this.isSocketAuthenticated = true;
-      });
+      this.socket.connect();
     });
-
-    this.socket.connect();
   }
 
   public onDonationSocket(react: (data: TransactionData) => void) {

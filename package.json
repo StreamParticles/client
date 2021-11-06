@@ -1,6 +1,6 @@
 {
   "name": "@streamparticles/client",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "StreamParticles npm client",
   "main": "out/index.js",
   "source": "src/index.ts",
