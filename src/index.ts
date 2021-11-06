@@ -15,7 +15,7 @@ const BASE_ENDPOINTS = {
 class StreamParticlesClient {
   private herotag: string;
   private apiKey: string;
-  public socket: Socket;
+  public socket?: Socket;
   private isSocketAuthenticated: boolean = false;
   private endpoints: { [key: string]: string } = {};
 
@@ -38,7 +38,7 @@ class StreamParticlesClient {
     };
 
     if (withSocket) {
-      this.socket = io(this.endpoints.SOCKET_GATEWAY);
+      this.socket = io(this.endpoints.SOCKET_GATEWAY, { autoConnect: false });
 
       this.socket.on("disconnect", () => {
         this.isSocketAuthenticated = false;
@@ -63,9 +63,7 @@ class StreamParticlesClient {
       throw new Error("You must enable socket client in class construction");
     }
 
-    // Server tell us that we are connect via socket
     this.socket.on("connect", () => {
-      console.log("test hello");
       // We emit an authentication socket with the authToken
       // We send the herotag too in order to join the good socket room
       this.socket.emit("authentication", {
@@ -78,9 +76,11 @@ class StreamParticlesClient {
         this.isSocketAuthenticated = true;
       });
     });
+
+    this.socket.connect();
   }
 
-  public onDonation(react: (data: TransactionData) => void) {
+  public onDonationSocket(react: (data: TransactionData) => void) {
     if (!this.isSocketAuthenticated) {
       throw new Error("You are not authenticated to the socket yet");
     }
