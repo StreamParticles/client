@@ -73,7 +73,7 @@ class StreamParticlesClient {
         });
 
         // Server responds that we are well authenticated
-        this.socket.on("authenticated", function () {
+        this.socket.on("authenticated", () => {
           this.isSocketAuthenticated = true;
           resolve();
         });
