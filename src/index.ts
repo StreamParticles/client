@@ -3,14 +3,7 @@ import io, { Socket } from "socket.io-client";
 
 import { axiosGet } from "./utils/axios";
 
-const HOST = "http://localhost:4000";
-
-const BASE_ENDPOINTS = {
-  LAST_DONATORS: `${HOST}/v1/analytics/last-donators/`,
-  TOP_DONATORS: `${HOST}/v1/analytics/top-donators/`,
-  DONATIONS_RECAP: `${HOST}/v1/analytics/donations-recap/`,
-  SOCKET_GATEWAY: `${HOST}`,
-};
+const HOST = "https://streamparticles.io";
 
 class StreamParticlesClient {
   private herotag: string;
@@ -31,10 +24,10 @@ class StreamParticlesClient {
     this.apiKey = apiKey;
 
     this.endpoints = {
-      LAST_DONATORS: `${BASE_ENDPOINTS.LAST_DONATORS}/api-key/${apiKey}`,
-      TOP_DONATORS: `${BASE_ENDPOINTS.TOP_DONATORS}/api-key/${apiKey}`,
-      DONATIONS_RECAP: `${BASE_ENDPOINTS.DONATIONS_RECAP}/api-key/${apiKey}`,
-      SOCKET_GATEWAY: BASE_ENDPOINTS.SOCKET_GATEWAY,
+      LAST_DONATORS: `${HOST}/v1/:apiKey/last-donators/`,
+      TOP_DONATORS: `${HOST}/v1/:apiKey/top-donators/`,
+      DONATIONS_RECAP: `${HOST}/v1/:apiKey/donations-recap/`,
+      SOCKET_GATEWAY: `${HOST}`,
     };
 
     if (withSocket) {
